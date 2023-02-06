@@ -14,9 +14,9 @@ namespace eMovies
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-
+            
             var app = builder.Build();
-
+                       
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -35,6 +35,9 @@ namespace eMovies
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            // Seed Database
+            AppDbInitializer.Seed(app);
 
             app.Run();
         }
