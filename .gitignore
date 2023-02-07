@@ -406,3 +406,5 @@ Training
 Blog
 About
 complete-ecommerce-aspnet-mvc-application/.gitignore at master · etrupja/complete-ecommerce-aspnet-mvc-application
+/eMovies.sln
+/.gitignore
