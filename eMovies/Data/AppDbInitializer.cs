@@ -35,19 +35,19 @@ namespace eMovies.Data
                         new Actor()
                         {
                             FullName = "Actor 3",
-                            Bio = "This is the Bio of the second actor",
+                            Bio = "This is the Bio of the third actor",
                             ProfilePictureURL = "http://dotnethow.net/images/actors/actor-3.jpeg"
                         },
                         new Actor()
                         {
                             FullName = "Actor 4",
-                            Bio = "This is the Bio of the second actor",
+                            Bio = "This is the Bio of the forth actor",
                             ProfilePictureURL = "http://dotnethow.net/images/actors/actor-4.jpeg"
                         },
                         new Actor()
                         {
                             FullName = "Actor 5",
-                            Bio = "This is the Bio of the second actor",
+                            Bio = "This is the Bio of the fifth actor",
                             ProfilePictureURL = "http://dotnethow.net/images/actors/actor-5.jpeg"
                         }
                     });
@@ -69,25 +69,25 @@ namespace eMovies.Data
                         {
                             Name = "Cinema 2",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-2.jpeg",
-                            Description = "This is the description of the first cinema"
+                            Description = "This is the description of the second cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 3",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-3.jpeg",
-                            Description = "This is the description of the first cinema"
+                            Description = "This is the description of the third cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 4",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-4.jpeg",
-                            Description = "This is the description of the first cinema"
+                            Description = "This is the description of the forth cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 5",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-5.jpeg",
-                            Description = "This is the description of the first cinema"
+                            Description = "This is the description of the fifth cinema"
                         },
                     });
                     context.SaveChanges();
@@ -113,19 +113,19 @@ namespace eMovies.Data
                         new Producer()
                         {
                             FullName = "Producer 3",
-                            Bio = "This is the Bio of the second actor",
+                            Bio = "This is the Bio of the third actor",
                             ProfilePictureURL = "http://dotnethow.net/images/producers/producer-3.jpeg"
                         },
                         new Producer()
                         {
                             FullName = "Producer 4",
-                            Bio = "This is the Bio of the second actor",
+                            Bio = "This is the Bio of the forth actor",
                             ProfilePictureURL = "http://dotnethow.net/images/producers/producer-4.jpeg"
                         },
                         new Producer()
                         {
                             FullName = "Producer 5",
-                            Bio = "This is the Bio of the second actor",
+                            Bio = "This is the Bio of the fifth actor",
                             ProfilePictureURL = "http://dotnethow.net/images/producers/producer-5.jpeg"
                         }
                     });

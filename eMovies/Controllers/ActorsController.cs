@@ -16,7 +16,7 @@ namespace eMovies.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.Actors.ToListAsync();
-            return View();
+            return View(data);
         }
     }
 }
