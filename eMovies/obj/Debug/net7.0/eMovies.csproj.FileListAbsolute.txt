@@ -73,3 +73,8 @@ C:\Users\NTG\source\repos\eMovies\eMovies\obj\Debug\net7.0\refint\eMovies.dll
 C:\Users\NTG\source\repos\eMovies\eMovies\obj\Debug\net7.0\eMovies.pdb
 C:\Users\NTG\source\repos\eMovies\eMovies\obj\Debug\net7.0\eMovies.genruntimeconfig.cache
 C:\Users\NTG\source\repos\eMovies\eMovies\obj\Debug\net7.0\ref\eMovies.dll
+C:\Users\NTG\source\repos\eMovies\eMovies\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\NTG\source\repos\eMovies\eMovies\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\NTG\source\repos\eMovies\eMovies\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\NTG\source\repos\eMovies\eMovies\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\NTG\source\repos\eMovies\eMovies\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
