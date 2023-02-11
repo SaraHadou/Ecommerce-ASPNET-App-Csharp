@@ -18,5 +18,10 @@ namespace eMovies.Controllers
             var data = await _context.Producers.ToListAsync();
             return View(data);
         }
-    }
+
+		public IActionResult Create()
+		{
+			return View();
+		}
+	}
 }

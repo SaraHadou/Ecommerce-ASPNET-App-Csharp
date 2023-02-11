@@ -1,4 +1,5 @@
 using eMovies.Data;
+using eMovies.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovies
@@ -12,8 +13,12 @@ namespace eMovies
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // DbContext configuration
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+            // Services configuration
+            builder.Services.AddScoped<IActorsService, ActorsService>();
             
             var app = builder.Build();
                        
