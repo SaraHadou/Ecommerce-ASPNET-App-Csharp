@@ -3,7 +3,7 @@ using eMovies.Models;
 
 namespace eMovies.Data.Services
 {
-	public interface IActorsService : IEntityBaseRepository<Actor>
+	public interface IProducersService : IEntityBaseRepository<Producer>
 	{	
 	}
 }

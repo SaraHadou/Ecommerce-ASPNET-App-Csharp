@@ -19,8 +19,10 @@ namespace eMovies
 
             // Services configuration
             builder.Services.AddScoped<IActorsService, ActorsService>();
-            
-            var app = builder.Build();
+            builder.Services.AddScoped<IProducersService, ProducersService>();
+            builder.Services.AddScoped<ICinemasService, CinemasService>();
+
+			var app = builder.Build();
                        
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
