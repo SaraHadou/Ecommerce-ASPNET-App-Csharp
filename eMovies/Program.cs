@@ -1,6 +1,9 @@
 using eMovies.Data;
+using eMovies.Data.Cart;
 using eMovies.Data.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+
 
 namespace eMovies
 {
@@ -23,6 +26,17 @@ namespace eMovies
             builder.Services.AddScoped<ICinemasService, CinemasService>();
 			builder.Services.AddScoped<IMoviesService, MoviesService>();
 
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddScoped(s => ShoppingCart.GetShoppingCart(s));
+
+			builder.Services.AddDistributedMemoryCache();
+
+			builder.Services.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromSeconds(10);
+				options.Cookie.HttpOnly = true;
+				options.Cookie.IsEssential = true;
+			});
 
 			var app = builder.Build();
                        
@@ -39,16 +53,19 @@ namespace eMovies
 
             app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
-            app.MapControllerRoute(
+			app.UseSession();
+
+			app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             // Seed Database
             AppDbInitializer.Seed(app);
 
-            app.Run();
-        }
-    }
+			app.Run();
+
+		}
+	}
 }
