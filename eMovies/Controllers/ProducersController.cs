@@ -1,9 +1,12 @@
 ﻿using eMovies.Data.Services;
+using eMovies.Data.Static;
 using eMovies.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eMovies.Controllers
 {
+	[Authorize(Roles = UserRoles.Admin)]
     public class ProducersController : Controller
     {
 		private readonly IProducersService _service;
@@ -14,6 +17,7 @@ namespace eMovies.Controllers
 		}
 
 		// Get: Producers
+		[AllowAnonymous]
 		public async Task<IActionResult> Index()
 		{
 			var data = await _service.GetAllAsync();
@@ -39,6 +43,7 @@ namespace eMovies.Controllers
 		}
 
 		// Get: Producers/Details/Id
+		[AllowAnonymous]
 		public async Task<IActionResult> Details(int id)
 		{
 			var producerDetails = await _service.GetByIdAsync(id);

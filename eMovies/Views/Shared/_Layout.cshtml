@@ -24,41 +24,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index"><i class="bi bi-film"></i> Movies</a>
                         </li>
-                        <li class="nav-item">
-                            <div class="dropdown show">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-gear"></i> Management
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a></li>                                      
-                                </ul>
-                            </div>
-                        </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <div class="dropdown show">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-gear"></i> Management
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a></li>                                      
+                                    </ul>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
-                <form class="form-inline d-flex" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px">
+                <form class="form-inline d-flex nav-item" asp-controller="Movies" asp-action="Filter">
                     <input class="form-control me-2" type="text" placeholder="Search for a movie..." name="searchString" aria-label="Recipient's username" aria-describedby="button-addon2" />
                     <button class="btn btn-outline-success me-2" type="submit"><i class="bi bi-search"></i></button>
                 </form>
-                <div class="align-center">
+                <div class="nav-item text-center">
                     <ul class="navbar-nav" style="list-style-type: none">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-outline-success dropdown-toggle" href="#" type="button" id="profile-btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bi bi-person-badge"></i> Hello User
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="profile-btn">
-                        <li>
-                            <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                                <i class="bi bi-list"></i> Orders
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <partial name="_Identity.cshtml"/>
             </div>
         </nav>
     </header>
@@ -69,7 +61,7 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - eMovies 
+            &copy; 2023 - eMovies  
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -8,6 +8,7 @@ namespace eMovies.Data.Cart
 		public AppDbContext _context { get; set; }
 		public string ShoppingCartId { get; set; }
 		public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+		public static ISession Session { get; set; }
 
 		public ShoppingCart(AppDbContext context)
 		{
@@ -16,11 +17,11 @@ namespace eMovies.Data.Cart
 
 		public static ShoppingCart GetShoppingCart(IServiceProvider services)
 		{
-			ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+			Session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 			var context = services.GetService<AppDbContext>();
 			
-			string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-			session.SetString("CartId", cartId);
+			string cartId = Session.GetString("CartId") ?? Guid.NewGuid().ToString();
+			Session.SetString("CartId", cartId);
 
 			return new ShoppingCart(context) { ShoppingCartId = cartId };
 		}
@@ -73,6 +74,9 @@ namespace eMovies.Data.Cart
 		{
 			var shoppingCartItems = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
 			_context.ShoppingCartItems.UpdateRange(shoppingCartItems);
+
+			Session.Remove("CartId");
+
 			await _context.SaveChangesAsync();	
 		}
 	}

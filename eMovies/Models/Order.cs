@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Identity.Client;
 
 namespace eMovies.Models
 {
@@ -10,6 +12,9 @@ namespace eMovies.Models
 		public string Email { get; set; }
 
 		public string UserId{ get; set; }
+
+		[ForeignKey("UserId")]	
+		public ApplicationUser User { get; set; }
 
 		public List<OrderItem> OrderItems { get; set;}
 	}

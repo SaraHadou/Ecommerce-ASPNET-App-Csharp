@@ -1,10 +1,13 @@
-﻿using eMovies.Data.Cart;
+﻿using System.Security.Claims;
+using eMovies.Data.Cart;
 using eMovies.Data.Services;
 using eMovies.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eMovies.Controllers
 {
+	[Authorize]
 	public class OrdersController : Controller
 	{
 		private readonly ShoppingCart _shoppingCart;
@@ -20,8 +23,8 @@ namespace eMovies.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			string userId = "";
-			string userRole = "";
+			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			string userRole = User.FindFirstValue(ClaimTypes.Role);
 
 			var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId, userRole);
 			return View(orders);
@@ -62,8 +65,8 @@ namespace eMovies.Controllers
 		public async Task<IActionResult> CompleteOrder()
 		{
 			var items = _shoppingCart.GetShoppingCartItems();
-			string userId = "";
-			string userRole = "";
+			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			string userRole = User.FindFirstValue(ClaimTypes.Role);
 
 			await _ordersService.StoreOrderAsync(items, userId, userRole);
 			await _shoppingCart.ClearShoppingCartAsync();

@@ -3,7 +3,9 @@ using eMovies.Data.Cart;
 using eMovies.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
-
+using eMovies.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace eMovies
 {
@@ -30,14 +32,22 @@ namespace eMovies
 			builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddScoped(s => ShoppingCart.GetShoppingCart(s));
 
+            // Authentication and authorization
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();  
+
 			builder.Services.AddDistributedMemoryCache();
 
 			builder.Services.AddSession(options =>
 			{
-				options.IdleTimeout = TimeSpan.FromSeconds(10);
+				options.IdleTimeout = TimeSpan.FromMinutes(30);
 				options.Cookie.HttpOnly = true;
 				options.Cookie.IsEssential = true;
 			});
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
 
 			var app = builder.Build();
                        
@@ -54,6 +64,7 @@ namespace eMovies
 
             app.UseRouting();
 
+            app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseSession();
@@ -64,6 +75,7 @@ namespace eMovies
 
             // Seed Database
             AppDbInitializer.Seed(app);
+            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
 			app.Run();
 

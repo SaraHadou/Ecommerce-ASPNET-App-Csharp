@@ -14,7 +14,12 @@ namespace eMovies.Data.Services
 
 		public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
 		{
-			var orders = await _context.Orders.Include(o => o.OrderItems).ThenInclude(m => m.Movie).Where(n => n.UserId == userId).ToListAsync();
+			var orders = await _context.Orders.Include(o => o.OrderItems).ThenInclude(m => m.Movie).Include(n => n.User).ToListAsync();
+
+			if (userRole == "User")
+			{
+				orders = orders.Where(o => o.UserId == userId).ToList();	
+			}
 			return orders;
 		}
 

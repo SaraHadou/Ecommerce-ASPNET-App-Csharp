@@ -1,9 +1,12 @@
 ﻿using eMovies.Data.Services;
+using eMovies.Data.Static;
 using eMovies.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eMovies.Controllers
 {
+	[Authorize(Roles = UserRoles.Admin)]
 	public class ActorsController : Controller
     {
         private readonly IActorsService _service;
@@ -14,7 +17,8 @@ namespace eMovies.Controllers
         }
 
         // Get: Actors
-        public async Task<IActionResult> Index()
+        [AllowAnonymous]
+		public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
             return View(data);
@@ -39,7 +43,8 @@ namespace eMovies.Controllers
 		}
 
         // Get: Actors/Details/Id
-        public async Task<IActionResult> Details(int id) 
+        [AllowAnonymous]
+		public async Task<IActionResult> Details(int id) 
         { 
             var actorDetails = await _service.GetByIdAsync(id);
             if (actorDetails == null) return View("NotFound");
